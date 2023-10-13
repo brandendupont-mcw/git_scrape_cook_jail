@@ -14,12 +14,20 @@ jobs:
       - name: Install Ghostscript
         run: sudo apt install ghostscript python3-tk
       - name: Setup deno
-        uses: denolib/setup-deno@v2
-      - name: Check out repo
-        uses: actions/checkout@v2
-      - name: Fetch data
-        uses: githubocto/flat@v2
+        uses: denoland/setup-deno@main
         with:
-          http_url: https://api.coindesk.com/v2/bpi/currentprice.json
-          downloaded_filename: btc-price.json
-          postprocess: ./postprocess.ts
+          deno-version: v1.10.x
+      - name: Check out repo
+        uses: actions/checkout@v2 
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8' # install the python version needed
+
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: execute py script # run postprocessing.py
+        run: python postprocessing.py

@@ -33,9 +33,9 @@ jobs:
         run: python postprocessing.py
         
       - name: Add and commit
-      id: add_commit
-      uses: EndBug/add-and-commit@v8
-      with:
-        committer_name: Automated
-        committer_email: actions@users.noreply.github.com
-        message: "Latest data"
+        id: add_commit
+        uses: EndBug/add-and-commit@v8
+        with:
+          committer_name: Automated
+          committer_email: actions@users.noreply.github.com
+          message: "Latest data"

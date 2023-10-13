@@ -6,8 +6,6 @@ import pandas as pd
 
 if __name__ == "__main__":
 
-    print("argv :", sys.argv)
-
   
     df = pd.DataFrame(np.random.randint(
     0, 100, size=(10, 4)), columns=list('ABCD'))

@@ -85,21 +85,21 @@ if __name__ == "__main__":
 
         else:
             print("PDF Report Name: ", pdf_report_name, " had more than one table")
-            url_failed = True
-            print("unsuccessful:",pdf_url)
+            print("unsuccessful pdf table parse:",pdf_url)
 
     except:
         url_failed = True
         print("unsuccessful:",pdf_url)
+        # save failed url if the pdf broke
+        if url_failed == True:
 
-# save failed url if the pdf broke
-if url_failed == True:
+            # add the failed dataset to pandas
+            FAILED_URL['failed_url'] = FAILED_URL['failed_url'].add(pdf_url)
 
-    # add the failed dataset to pandas
-    FAILED_URL['failed_url'] = FAILED_URL['failed_url'].add(pdf_url)
+            #overwrite and save data
+            FAILED_URL.to_csv('data/failed_url.csv', index=False)
 
-    #overwrite and save data
-    FAILED_URL.to_csv('data/failed_url.csv', index=False)
+
 
 
 

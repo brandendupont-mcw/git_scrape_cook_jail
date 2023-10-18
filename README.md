@@ -2,6 +2,12 @@
 
 A Python script that collects Cook jail population and community correction data. 
 
+# Visualization
+
+[Cook County Jail Population](https://www.datawrapper.de/_/JoeoH/)
+
+[Cook County Community Corrections Population](https://www.datawrapper.de/_/GlakD/)
+
 ## Execution :
 
 - the Github Action action is scheduled daily.
@@ -21,3 +27,5 @@ A Python script that collects Cook jail population and community correction data
 ## Maintainted by the Loyola Center for Criminal Justice.
 
 <img src="https://loyolaccj.org/static/images/ccj-loyola-black.svg" alt="drawing" width="250"/> 
+
+<iframe title="Cook County Jail Population" aria-label="Interactive line chart" id="datawrapper-chart-JoeoH" src="https://datawrapper.dwcdn.net/JoeoH/1/" scrolling="no" frameborder="0" style="border: none;" width="600" height="400" data-external="1"></iframe>

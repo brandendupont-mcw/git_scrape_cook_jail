@@ -11,12 +11,10 @@ jobs:
   scheduled:
     runs-on: ubuntu-latest
     steps:
+      - name: sudo update
+        run: sudo apt-get update
       - name: Install Ghostscript
         run: sudo apt install ghostscript python3-tk
-      - name: Setup deno
-        uses: denoland/setup-deno@main
-        with:
-          deno-version: v1.10.x
       - name: Check out repo
         uses: actions/checkout@v2 
       - name: setup python

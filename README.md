@@ -1,8 +1,6 @@
 # Scrape Cook County's Jail Population Report 
 
-A Python script that collects Cook jail population and community correction data. Maintainted by the Loyola Center for Criminal Justice.
-
-<img src="https://loyolaccj.org/static/images/ccj-loyola-black.svg" alt="drawing" width="160"/> 
+A Python script that collects Cook jail population and community correction data. 
 
 ## Execution :
 
@@ -20,4 +18,6 @@ A Python script that collects Cook jail population and community correction data
 - Data begins at 01-01-2018 and is updated daily. Data collected between 2018-2020 is taken from a prior Loyola Center for Criminal Justice Project and was collected by hand. We imputed the few jail records where the Cook County Jail failed to add a pdf report for that day. Data from 2021-present is populated through a backfill of the pdf scraper that triggers daily. Both files were combined to create the `data/cook-jail-data.csv` file that updates daily.
 
 
+## Maintainted by the Loyola Center for Criminal Justice.
 
+<img src="https://loyolaccj.org/static/images/ccj-loyola-black.svg" alt="drawing" width="250"/> 

@@ -28,4 +28,3 @@ A Python script that collects Cook jail population and community correction data
 
 <img src="https://loyolaccj.org/static/images/ccj-loyola-black.svg" alt="drawing" width="250"/> 
 
-<iframe title="Cook County Jail Population" aria-label="Interactive line chart" id="datawrapper-chart-JoeoH" src="https://datawrapper.dwcdn.net/JoeoH/1/" scrolling="no" frameborder="0" style="border: none;" width="600" height="400" data-external="1"></iframe>

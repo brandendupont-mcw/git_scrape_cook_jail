@@ -15,7 +15,7 @@ if __name__ == "__main__":
     today_yr = date.today().year
     today_month =  date.today().month
     # run the scraper on a day lag
-    today_day =  date.today().day 
+    today_day =  date.today().day -1
 
     # add leading zeros to single digit month and days to match the sherrif's pdf template
     month = "{:02d}".format(today_month)

@@ -1,12 +1,16 @@
 import camelot
-from datetime import date
+from datetime import date, timedelta
 import pandas as pd
 import numpy as np
 
 
+def parse_append_pdf(pdf_day):
 
-if __name__ == "__main__":
+    """
+    A function to parse and append jail data.
+    """
 
+    
     # import data
     PAST_JAIL_DATA = pd.read_csv("data/cook-jail-data.csv")
     FAILED_URL = pd.read_csv("data/failed_url.csv")
@@ -15,7 +19,7 @@ if __name__ == "__main__":
     today_yr = date.today().year
     today_month =  date.today().month
     # run the scraper on a day lag
-    today_day =  date.today().day
+    today_day =  pdf_day
 
     # add leading zeros to single digit month and days to match the sherrif's pdf template
     month = "{:02d}".format(today_month)
@@ -100,6 +104,28 @@ if __name__ == "__main__":
             #overwrite and save data
             FAILED_URL.to_csv('data/failed_url.csv', index=False)
 
+
+
+
+if __name__ == "__main__":
+
+    today_day =  date.today().day
+    weekday = date.today().weekday()
+
+    #on mondays parse pdfs that are updated on the weekend
+    if weekday == 0:
+
+        saturday = (date.today() - timedelta(days = 2)).day
+        sunday = (date.today() - timedelta(days = 1)).day
+
+        for pdf_day in [today_day, saturday, sunday]:
+            
+            parse_append_pdf(pdf_day=pdf_day)
+
+    # parse pdfs normally Tuesday-Friday
+    elif (weekday > 0) & ( weekday < 5):
+
+        parse_append_pdf(pdf_day=today_day)
 
 
 

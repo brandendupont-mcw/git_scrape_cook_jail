@@ -113,12 +113,12 @@ if __name__ == "__main__":
     weekday = date.today().weekday()
 
     #on mondays parse pdfs that are updated on the weekend
-    if weekday == 1:
+    if weekday == 0:
 
         saturday = (date.today() - timedelta(days = 2)).day
         sunday = (date.today() - timedelta(days = 1)).day
 
-        for pdf_day in [4,5,6]:
+        for pdf_day in [today_day, saturday, sunday]:
             
             parse_append_pdf(pdf_day=pdf_day)
 

@@ -113,7 +113,7 @@ if __name__ == "__main__":
     weekday = date.today().weekday()
 
     #on mondays parse pdfs that are updated on the weekend
-    if weekday == 0:
+    if weekday == 1:
 
         saturday = (date.today() - timedelta(days = 2)).day
         sunday = (date.today() - timedelta(days = 1)).day

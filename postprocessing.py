@@ -4,7 +4,31 @@ import pandas as pd
 import numpy as np
 
 
-def parse_append_pdf(pdf_day):
+def get_backfill_dates():
+
+  """
+  This function runs each day. It generates a pandas series of dates in the past 30 days where the jail did not upload data on the same day when the pdf scraper ran.
+  """
+
+  bf_df = pd.read_csv('https://raw.githubusercontent.com/brandendupont-mcw/git_scrape_cook_jail/main/data/cook-jail-data.csv')
+
+  #convert date col to datetime  
+  bf_df['Date'] = pd.to_datetime(bf_df['Date'], errors='coerce')
+
+  #make sure the data is a date
+  assert bf_df['Date'].dtype.type == np.datetime64
+
+  #grab the last 30 days of the dataset
+  last_30 = bf_df.set_index('Date').last('30D')
+
+  #generate a backfill range  
+  backfill_range = pd.date_range(last_30.index.min(), last_30.index.max())
+
+  #return non intersect array of the two date lists
+  # AKA, all dates not stored in the pdf file
+  return pd.Series(np.setxor1d(last_30.index, backfill_range))
+
+def parse_append_pdf(pdf_day, pdf_month=None):
 
     """
     A function to parse and append jail data.
@@ -22,7 +46,11 @@ def parse_append_pdf(pdf_day):
     today_day =  pdf_day
 
     # add leading zeros to single digit month and days to match the sherrif's pdf template
-    month = "{:02d}".format(today_month)
+    if pdf_month == None:
+        month = "{:02d}".format(today_month)
+    else:
+        month = "{:02d}".format(pdf_month)
+        
     day = "{:02d}".format(today_day)
 
     # create the templated pdf
@@ -112,8 +140,17 @@ if __name__ == "__main__":
     today_day =  date.today().day
     weekday = date.today().weekday()
 
+    backfill_dates = get_backfill_dates()
+
+    # perform any backfill pdf parsing 
+    if len(backfill_dates) > 0:
+    
+        for day in backfill_dates:
+
+            parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
+
     #on mondays parse pdfs that are updated on the weekend
-    if weekday == 0:
+    elif weekday == 0:
 
         saturday = (date.today() - timedelta(days = 2)).day
         sunday = (date.today() - timedelta(days = 1)).day

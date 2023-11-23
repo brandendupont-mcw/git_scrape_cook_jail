@@ -28,6 +28,7 @@ def get_backfill_dates():
   # AKA, all dates not stored in the pdf file
   return pd.Series(np.setxor1d(last_30.index, backfill_range))
 
+
 def parse_append_pdf(pdf_day, pdf_month=None):
 
     """
@@ -142,15 +143,8 @@ if __name__ == "__main__":
 
     backfill_dates = get_backfill_dates()
 
-    # perform any backfill pdf parsing 
-    if len(backfill_dates) > 0:
-    
-        for day in backfill_dates:
-
-            parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
-
     #on mondays parse pdfs that are updated on the weekend
-    elif weekday == 0:
+    if weekday == 0:
 
         saturday = (date.today() - timedelta(days = 2)).day
         sunday = (date.today() - timedelta(days = 1)).day
@@ -158,11 +152,27 @@ if __name__ == "__main__":
         for pdf_day in [today_day, saturday, sunday]:
             
             parse_append_pdf(pdf_day=pdf_day)
+        
+        # perform any backfill pdf parsing 
+        if len(backfill_dates) > 0:
+        
+            for day in backfill_dates:
+
+                parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
+
 
     # parse pdfs normally Tuesday-Friday
     elif (weekday > 0) & ( weekday < 5):
 
         parse_append_pdf(pdf_day=today_day)
+    
+        # perform any backfill pdf parsing 
+        if len(backfill_dates) > 0:
+        
+            for day in backfill_dates:
+
+                parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
+
 
 
 

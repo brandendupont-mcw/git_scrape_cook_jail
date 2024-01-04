@@ -29,7 +29,7 @@ def get_backfill_dates():
   return pd.Series(np.setxor1d(last_30.index, backfill_range))
 
 
-def parse_append_pdf(pdf_day, pdf_month=None):
+def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
 
     """
     A function to parse and append jail data.
@@ -51,11 +51,16 @@ def parse_append_pdf(pdf_day, pdf_month=None):
         month = "{:02d}".format(today_month)
     else:
         month = "{:02d}".format(pdf_month)
+
+    if pdf_year == None:
+        year = "{:02d}".format(today_yr)
+    else:
+        year = "{:02d}".format(pdf_year)
         
     day = "{:02d}".format(today_day)
 
     # create the templated pdf
-    pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{today_yr}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{today_yr}_{month}_{day}.pdf"
+    pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{year}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{year}_{month}_{day}.pdf"
 
     # parse the pdf
     try:
@@ -118,7 +123,7 @@ def parse_append_pdf(pdf_day, pdf_month=None):
                 combine.to_csv('data/cook-jail-data.csv', index=False)
 
         else:
-            print("PDF Report Name: ", pdf_report_name, " had more than one table")
+            print("PDF Report Name: ", pdf_url, " had more than one table")
             print("unsuccessful pdf table parse:",pdf_url)
 
     except:
@@ -158,7 +163,7 @@ if __name__ == "__main__":
         
             for day in backfill_dates:
 
-                parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
+                parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
 
 
     # parse pdfs normally Tuesday-Friday
@@ -171,7 +176,7 @@ if __name__ == "__main__":
         
             for day in backfill_dates:
 
-                parse_append_pdf(pdf_day=day.day, pdf_month=day.month)
+                parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
 
 
 

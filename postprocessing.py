@@ -43,7 +43,7 @@ def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
   
     today_yr = date.today().year
     today_month =  date.today().month
-    today_month = "{:02d}".format(today_month)
+    
     # run the scraper on a day lag
     today_day =  pdf_day
 
@@ -59,6 +59,9 @@ def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
         year = "{:02d}".format(pdf_year)
         
     day = "{:02d}".format(today_day)
+
+    #drop this later
+    today_month = "{:02d}".format(today_month)
 
     # create the templated pdf
     #pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{year}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{year}_{month}_{day}.pdf"

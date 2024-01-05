@@ -43,6 +43,7 @@ def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
   
     today_yr = date.today().year
     today_month =  date.today().month
+    today_month = "{:02d}".format(today_month)
     # run the scraper on a day lag
     today_day =  pdf_day
 

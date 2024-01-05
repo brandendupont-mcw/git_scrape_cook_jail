@@ -64,11 +64,8 @@ def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
     today_month = "{:02d}".format(today_month)
 
     # create the templated pdf
-    #pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{year}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{year}_{month}_{day}.pdf"
+    pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{year}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{year}_{month}_{day}.pdf"
 
-    pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{today_yr}/{today_month}/CCSO_BIU_DailyCCDOC_v9_{year}_{month}_{day}.pdf"
-
-    #https://www.cookcountysheriffil.gov/wp-content/uploads/2024/01/CCSO_BIU_DailyCCDOC_v9_2024_01_01.pdf
 
     # parse the pdf
     try:

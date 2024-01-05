@@ -63,7 +63,7 @@ def parse_append_pdf(pdf_day, pdf_month=None, pdf_year=None):
     #pdf_url = f"https://www.cookcountysheriffil.gov/wp-content/uploads/{today_yr}/{month}/CCSO_BIU_CommunicationsCCDOC_v1_{year}_{month}_{day}.pdf"
 
     #backfill new url briefly used
-    pdf_url =  f"https://www.cookcountysheriffil.gov/wp-content/uploads/{today_yr}/{month}/CCSO_BIU_DailyCCDOC_v9_{year}_{month}_{day}.pdf"
+    pdf_url =  f"https://www.cookcountysheriffil.gov/wp-content/uploads/{today_yr}/{today_month}/CCSO_BIU_DailyCCDOC_v9_{year}_{month}_{day}.pdf"
 
     # parse the pdf
     try:

@@ -177,6 +177,8 @@ if __name__ == "__main__":
     elif (weekday > 0) & ( weekday < 5):
 
         parse_append_pdf(pdf_day=today_day)
+
+        print("The number of backfill dates is: ", len(backfill_dates))
     
         # perform any backfill pdf parsing 
         if len(backfill_dates) > 0:

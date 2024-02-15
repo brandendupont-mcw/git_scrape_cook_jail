@@ -155,6 +155,8 @@ if __name__ == "__main__":
 
     backfill_dates = get_backfill_dates()
 
+    print("The number of backfill dates is: ", len(backfill_dates))
+
     #on mondays parse pdfs that are updated on the weekend
     if weekday == 0:
 
@@ -178,7 +180,6 @@ if __name__ == "__main__":
 
         parse_append_pdf(pdf_day=today_day)
 
-        print("The number of backfill dates is: ", len(backfill_dates))
     
         # perform any backfill pdf parsing 
         if len(backfill_dates) > 0:

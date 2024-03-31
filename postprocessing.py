@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
     #run chart update
     print('chart is updating')
-    add_chart_calculation(API_KEY=API_KEY)
+    add_chart_calculation()
 
 
 

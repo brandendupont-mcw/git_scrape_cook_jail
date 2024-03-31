@@ -29,6 +29,8 @@ jobs:
 
       - name: execute py script # run postprocessing.py
         run: python postprocessing.py
+        env:
+          DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
         
       - name: Add and commit
         id: add_commit

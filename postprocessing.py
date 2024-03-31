@@ -27,8 +27,8 @@ def add_chart_calculation():
 
   chart_calculation_string = f"<br>Since the implementation of the PFA on September 17th, on {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b>."
 
-  api_key = os.environ['DATAWRAPPER_API']
-  dw = Datawrapper(access_token=api_key)
+  API_KEY = os.environ['DATAWRAPPER_API']
+  dw = Datawrapper(access_token=API_KEY)
   dw.update_description(chart_id='JoeoH', intro=chart_calculation_string)
   dw.publish_chart(chart_id='JoeoH')
 

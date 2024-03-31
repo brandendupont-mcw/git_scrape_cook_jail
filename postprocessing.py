@@ -4,11 +4,15 @@ import pandas as pd
 import numpy as np
 import os
 from datawrapper import Datawrapper
+import calendar
 
 # comment
 API_KEY = os.getenv("DATAWRAPPER_API")
 
 def add_chart_calculation(API_KEY=API_KEY):
+
+  def get_ordinal_suffix(day: int) -> str:
+    return {1: 'st', 2: 'nd', 3: 'rd'}.get(day % 10, 'th') if day not in (11, 12, 13) else 'th'
 
   HTML_STRING = """<b style="background-color: rgb(255, 191, 0); padding-left: 3px; padding-right: 3px ">"""
  
@@ -22,7 +26,7 @@ def add_chart_calculation(API_KEY=API_KEY):
   pfa_diff = pfa_calc.diff().dropna()
   up_or_down = np.where(pfa_diff['Jail Population'].values[0] < 0, 'down', 'up')
 
-  chart_calculation_string = f"<br>Since the implementation of the PFA on September 17th, the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b>."
+  chart_calculation_string = f"<br>Since the implementation of the PFA on September 17th, on {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b>."
 
   dw = Datawrapper(access_token =API_KEY)
   dw.update_description(chart_id='JoeoH', intro=chart_calculation_string)

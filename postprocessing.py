@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
     #run chart update
     print('chart is updating')
-    add_chart_calculation()
+    #add_chart_calculation()
 
 
 

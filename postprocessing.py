@@ -2,8 +2,31 @@ import camelot
 from datetime import date, timedelta
 import pandas as pd
 import numpy as np
+import os
+from datawrapper import Datawrapper
 
 # comment
+API_KEY = os.getenv("DATAWRAPPER_API")
+
+def add_chart_calculation(API_KEY=API_KEY):
+
+  HTML_STRING = """<b style="background-color: rgb(255, 191, 0); padding-left: 3px; padding-right: 3px ">"""
+ 
+  
+  jpop = pd.read_csv('data/cook-jail-data.csv', parse_dates=['Date'])
+
+  pfa_start_date = '2023-09-17'
+  most_recent_date = jpop['Date'].max().strftime("%Y-%m-%d")
+
+  pfa_calc = jpop[jpop['Date'].isin([pfa_start_date, most_recent_date])]
+  pfa_diff = pfa_calc.diff().dropna()
+  up_or_down = np.where(pfa_diff['Jail Population'].values[0] < 0, 'down', 'up')
+
+  chart_calculation_string = f"<br>Since the implementation of the PFA on September 17th, the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b>."
+
+  dw = Datawrapper(access_token =API_KEY)
+  dw.update_description(chart_id='JoeoH', intro=chart_calculation_string)
+  dw.publish_chart(chart_id='JoeoH')
 
 
 def get_backfill_dates():
@@ -174,6 +197,8 @@ if __name__ == "__main__":
 
                 parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
 
+        add_chart_calculation(API_KEY=API_KEY)
+
 
     # parse pdfs normally Tuesday-Friday
     elif (weekday > 0) & ( weekday < 5):
@@ -187,6 +212,8 @@ if __name__ == "__main__":
             for day in backfill_dates:
 
                 parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
+              
+            add_chart_calculation(API_KEY=API_KEY)
 
 
 

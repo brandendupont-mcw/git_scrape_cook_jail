@@ -201,7 +201,7 @@ if __name__ == "__main__":
 
                 parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
 
-        add_chart_calculation(API_KEY=API_KEY)
+        
 
 
     # parse pdfs normally Tuesday-Friday
@@ -217,7 +217,10 @@ if __name__ == "__main__":
 
                 parse_append_pdf(pdf_day=day.day, pdf_month=day.month, pdf_year=day.year)
               
-            add_chart_calculation(API_KEY=API_KEY)
+
+      #run chart update
+      print('chart is updating')
+      add_chart_calculation(API_KEY=API_KEY)
 
 
 

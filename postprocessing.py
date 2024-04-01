@@ -25,12 +25,18 @@ def add_chart_calculation():
   up_or_down = np.where(pfa_diff['Jail Population'].values[0] < 0, 'down', 'up')
   pfa_change = pfa_calc.set_index('Date').pct_change().dropna()
 
-  chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b> since the implementation of the PFA on September 17th."
+  em_up_or_down = np.where(pfa_diff['Community Corrections'].values[0] < 0, 'down', 'up')
 
+  chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{pfa_change['Jail Population'].values[0].round(3) * 100}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b> since the implementation of the PFA on September 17th."
+  em_chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily electronic monitoring population is {em_up_or_down} {HTML_STRING}{pfa_change['Community Corrections'].values[0].round(3) * 100}%</b> — a difference in individuals on EM of {HTML_STRING}{pfa_diff['Community Corrections'].values[0]}</b> since the implementation of the PFA on September 17th."
   API_KEY = os.environ['DATAWRAPPER_API']
   dw = Datawrapper(access_token=API_KEY)
   dw.update_description(chart_id='JoeoH', intro=chart_calculation_string)
   dw.publish_chart(chart_id='JoeoH')
+
+  #update em 
+  dw.update_description(chart_id='GlakD', intro=em_chart_calculation_string)
+  dw.publish_chart(chart_id='GlakD')
 
 
 def get_backfill_dates():

@@ -28,9 +28,9 @@ def add_chart_calculation():
 
   em_up_or_down = np.where(pfa_diff['Community Corrections'].values[0] < 0, 'down', 'up')
 
-  chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{round(pfa_change['Jail Population'].values[0] * 100, 1 )}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b> since the implementation of the PFA on September 17th."
+  chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily jail population is {up_or_down} {HTML_STRING}{round(pfa_change['Jail Population'].values[0] * 100, 1 )}%</b> — a difference in ADP of {HTML_STRING}{pfa_diff['Jail Population'].values[0]}</b> since the implementation of the PFA on September 18th."
 
-  em_chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily electronic monitoring population is {em_up_or_down} {HTML_STRING}{round(pfa_change['Community Corrections'].values[0] * 100, 1 )}%</b> — a difference in individuals on EM of {HTML_STRING}{pfa_diff['Community Corrections'].values[0]}</b> since the implementation of the PFA on September 17th."
+  em_chart_calculation_string = f"<br>On {calendar.month_name[jpop['Date'].max().month]} {str(jpop['Date'].max().day) + get_ordinal_suffix(jpop['Date'].max().day)} the Cook County average daily electronic monitoring population is {em_up_or_down} {HTML_STRING}{round(pfa_change['Community Corrections'].values[0] * 100, 1 )}%</b> — a difference in individuals on EM of {HTML_STRING}{pfa_diff['Community Corrections'].values[0]}</b> since the implementation of the PFA on September 18th."
 
   API_KEY = os.environ['DATAWRAPPER_API']
   dw = Datawrapper(access_token=API_KEY)

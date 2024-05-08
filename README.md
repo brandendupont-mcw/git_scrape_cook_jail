@@ -16,7 +16,7 @@ A Python script that collects Cook jail population and community correction data
 
 - the `postprocess.py` script is then trigged and parses the daily pdf table into a cleaned pandas dataframe. Then, an existing .csv of past jail records is imported and the parsed csv is appened to that file and saved at `data/cook-jail-data.csv`.
 - the jail occasionally will fail to upload a pdf or the pdf will be corrupted in a way that makes parsing the pdf table fail. In these cases data is stored in the `data/failed_url.csv` file.
-- The most recent parsed pdf table is saved at `data/[date-of-pdf]-parsed-pdf-table.csv`. This filed is not filtered or subset.
+- The most recent parsed pdf table is saved at `data/[date-of-pdf]-parsed-pdf-table.csv`. This file is not filtered or subset.
   
 ## Data Notes
 
